@@ -1,29 +1,26 @@
-import React from 'react'
+import React from 'react';
 
-const Navbar = () => {
+const NavBar = ({ setCurrentPage }) => {
   return (
     <>
       <div className='navBar'>
-            <div className='nav'>
-                <a href="#" className='logo'>
-                    <h1>
-                        GeekFoods
-                    </h1>
-                </a>
-                <ul className='navItems'>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">Quote</a></li>
-                    <li><a href="#skills">Resturants</a></li>
-                    <li><a href="#experience">Foods</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <button className='GetStarted-btn'>
-                    Get Started
-                </button>
-            </div>
+        <div className='nav'>
+          <div className="logoSec">
+            <img src="https://flowbite.com/docs/images/logo.svg" alt="logo" />
+            <h1>GeekFoods</h1>
+          </div>
+          <ul className='navItems'>
+            <li id='homeLink'><a href="#home" onClick={() => setCurrentPage('home')}>Home</a></li>
+            <li><a href="#quote" onClick={() => setCurrentPage('quote')}>Quote</a></li>
+            <li><a href="#restaurants" onClick={() => setCurrentPage('restaurants')}>Restaurants</a></li>
+            <li><a href="#foods" onClick={() => setCurrentPage('foods')}>Foods</a></li>
+            <li><a href="#contact" onClick={() => setCurrentPage('contact')}>Contact</a></li>
+          </ul>
+          <button className='GetStarted-btn'>Get Started</button>
+        </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default NavBar;

@@ -3,6 +3,23 @@
   padding: 0;
   box-sizing: border-box;
 }
+.logoSec{
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  gap:  15px;
+}
+.logo img{
+  width: 60px;
+  cursor: pointer;
+}
+.logoSec h1{
+  font-size: 1.8rem;
+  color: #fff;
+  text-decoration: none;
+}
 .logo{
   font-size: 1.2rem;
   color: #fff;
@@ -40,7 +57,9 @@
 .navItems a:hover{
   color: #007bff;
 }
-
+#homeLink a{
+  color: #007bff;
+}
 .GetStarted-btn{
   padding: 10px 20px;
   font-weight: bold;
@@ -231,8 +250,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  
+  color: #fff;  
 }
 .home-footer{
   width: 80%;
@@ -273,4 +291,37 @@
   margin-top: 20px;
   font-size: 1.2rem;
   justify-content: center;
+}
+
+/* Quotes section */
+
+
+.quoteSection{
+  width: 100%;
+
+  background-color: #f5f5f5;
+}
+.quotes{
+  width: 80%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+  padding: 2rem 2.5rem;
+  border-radius: 20px;
+  margin: 1.5rem auto;
+  background-color: rgb(33, 33, 65);
+}
+.quotesPara{
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+}
+.quoteWritter{
+  font-size: 1.1rem;
+  color: #8c8383;
+  margin-top: 1rem;
+  text-align: right;
 }

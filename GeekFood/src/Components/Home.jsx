@@ -1,12 +1,9 @@
 import React from 'react'
-import Navbar from './Navbar'
 import Touch from './Touch'
-import Footer from './Footer'
 
 const Home = () => {
   return (
     <>
-      <Navbar/>
       <div className='hero'>
         <div className='heroImg'>
             <div className="hero-content">
@@ -28,7 +25,6 @@ const Home = () => {
         </div>      
       </div>
       <Touch/>
-      <Footer/>
     </>
   )
 }
