@@ -49,7 +49,7 @@ function App() {
     <div className="main-container">
       <div className="center-container">
         <Planner addList={addList} />
-        <h1 className="app-heading">TODO</h1>
+        <h1 className="app-heading">Learning Planner</h1>
         <hr />
         {plannerList.map((listItem, i) => {
           return (
