@@ -5,15 +5,24 @@ import Loading from './Components/Loading';
 
 function App() {
   const [plannerList, setPlannerList] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
+  // Load planner list from local storage when the app loads
   useEffect(() => {
+    const savedPlannerList = localStorage.getItem('plannerList');
+    if (savedPlannerList) {
+      setPlannerList(JSON.parse(savedPlannerList));
+    }
+
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
+
+
 
   const addList = (inputText, inputHours) => {
     if (inputText !== '') {
@@ -31,6 +40,7 @@ function App() {
     const newPlannerList = [...plannerList];
     newPlannerList[index].hours += 1;
     setPlannerList(newPlannerList);
+    localStorage.setItem('plannerList', JSON.stringify(plannerList));
   };
 
   const decrementTime = (index) => {
