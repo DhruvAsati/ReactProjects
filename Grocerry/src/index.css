@@ -1,0 +1,208 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif; /* Modern font for clean look */
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Softer background gradient */
+}
+
+/* Keyframe Animation for Background Transition */
+@keyframes gradientShift {
+  0%, 100% {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  }
+  50% {
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+  }
+}
+
+body {
+  animation: gradientShift 20s ease infinite; /* Smooth background transition */
+}
+
+/* Main Flex Container */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Centered Content Container */
+.center-container {
+  width: 500px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.center-container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Subtle hover elevation */
+}
+
+/* App Heading */
+.app-heading {
+  font-size: 26px;
+  color: #2b2d42;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+/* Divider */
+hr {
+  border: none;
+  height: 2px;
+  background: #dcdde1;
+  margin: 20px 0;
+}
+
+/* Input and Add Button Container */
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.input-box-todo {
+  flex-grow: 1;
+  height: 45px;
+  padding: 0 15px;
+  border-radius: 8px;
+  border: 2px solid #dfe4ea;
+  font-size: 16px;
+  background-color: #f1f2f6;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-box-todo:focus {
+  border-color: #2b2d42;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+/* Add Button Styling */
+.add-btn {
+  width: 55px;
+  height: 45px;
+  border-radius: 8px;
+  background-color: #2b2d42;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  margin-left: 1rem;
+}
+
+.add-btn:hover {
+  background-color: #24252c;
+}
+
+.add-btn:active {
+  transform: scale(0.95);
+}
+
+/* Task List Styling */
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.list-item:hover {
+  background-color: #f1f2f6;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Icons Section */
+.icons {
+  display: flex;
+  align-items: center;
+}
+
+.icons i {
+  font-size: 18px;
+  color: #868686;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.icons i:hover {
+  color: #2b2d42;
+  transform: scale(1.1);
+}
+
+/* Delete Icon Specific Styling */
+.icon-delete:hover {
+  color: #ff6b6b;
+}
+
+/* Strikethrough for Completed Tasks */
+.checked {
+  text-decoration: line-through;
+  color: #b2bec3;
+  opacity: 0.7;
+}
+
+
+/* Loading Container */
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Spinner Design */
+.spinner {
+  width: 80px;
+  height: 80px;
+  border: 8px solid rgba(0, 0, 0, 0.1); /* Faint background circle */
+  border-top: 8px solid #2b2d42; /* Stronger color for top border */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Keyframe for Spinner Rotation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading Text */
+.loading-text {
+  margin-top: 15px;
+  color: #2b2d42;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
