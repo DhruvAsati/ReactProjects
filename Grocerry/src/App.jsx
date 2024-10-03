@@ -25,24 +25,20 @@ function App() {
 
 
 
-  const addList = (inputText, inputHours) => {
+  const addList = (inputText) => {
     if (inputText !== '') {
-      setPlannerList([...plannerList, { text: inputText, hours: parseInt(inputHours) }]);
+      setPlannerList([...plannerList, { text: inputText}]);
     }
+    localStorage.setItem('plannerList', JSON.stringify(plannerList));
   };
 
   const deleteListItem = (key) => {
     const newPlannerList = [...plannerList];
     newPlannerList.splice(key, 1);
     setPlannerList(newPlannerList);
+   
   };
 
-  const incrementTime = (index) => {
-    const newPlannerList = [...plannerList];
-    newPlannerList[index].hours += 1;
-    setPlannerList(newPlannerList);
-    localStorage.setItem('plannerList', JSON.stringify(plannerList));
-  };
 
   if (loading) {
     return <Loading />;
