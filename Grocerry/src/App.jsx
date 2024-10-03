@@ -28,8 +28,9 @@ function App() {
   const addList = (inputText) => {
     if (inputText !== '') {
       setPlannerList([...plannerList, { text: inputText}]);
+      localStorage.setItem('plannerList', JSON.stringify(plannerList));
     }
-    localStorage.setItem('plannerList', JSON.stringify(plannerList));
+   
   };
 
   const deleteListItem = (key) => {
