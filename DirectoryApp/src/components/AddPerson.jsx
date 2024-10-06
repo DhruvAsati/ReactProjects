@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const AddPerson = () => {
-  const [activeScreen, setActiveScreen] = useState("addPerson"); // Switch between 'addPerson' and 'retrieve'
-  const [showForm, setShowForm] = useState(false); // Show form when 'Add' button is clicked
-  const [people, setPeople] = useState([]); // Store people data
-  const [searchTerm, setSearchTerm] = useState(""); // For search functionality
+  const [activeScreen, setActiveScreen] = useState("addPerson");
+  const [showForm, setShowForm] = useState(false);
+  const [people, setPeople] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [newPerson, setNewPerson] = useState({
     name: "",
     dob: "",
@@ -13,53 +13,58 @@ const AddPerson = () => {
     age: "",
   });
 
-  // Switch between Add and Retrieve screens
+  useEffect(() => {
+    console.log("Current people state:", people);
+  }, [people]);
+
   const handleScreenSwitch = (screen) => {
     setActiveScreen(screen);
-    setShowForm(false); // Reset form view when switching screens
+    setShowForm(false);
   };
 
-  // Modify handleInputChange to include validation
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let updatedValue = value;
 
-    if (name === "aadhar") {
-      updatedValue = value.replace(/\D/g, "").slice(0, 12);
-    } else if (name === "mobile") {
-      updatedValue = value.replace(/\D/g, "").slice(0, 10);
-    } else if (name === "age") {
-      updatedValue = value.replace(/\D/g, "");
+    if (name === 'aadhar') {
+      updatedValue = value.replace(/\D/g, '').slice(0, 12);
+    } else if (name === 'mobile') {
+      updatedValue = value.replace(/\D/g, '').slice(0, 10);
+    } else if (name === 'age') {
+      updatedValue = value.replace(/\D/g, '');
     }
 
-    setNewPerson({
-      ...newPerson,
+    setNewPerson(prevPerson => ({
+      ...prevPerson,
       [name]: updatedValue,
-    });
+    }));
   };
 
-  // Add new person to the list
   const handleAddPerson = () => {
+    console.log("Attempting to add person:", newPerson);
     if (
       newPerson.name &&
       newPerson.dob &&
-      newPerson.aadhar.length === 13 &&
+      newPerson.aadhar.length === 12 &&
       newPerson.mobile.length === 10 &&
       newPerson.age
     ) {
-      setPeople([...people, newPerson]);
-      setNewPerson({ name: "", dob: "", aadhar: "", mobile: "", age: "" }); // Reset form
-      setShowForm(false); // Hide form after adding
+      setPeople(prevPeople => {
+        const updatedPeople = [...prevPeople, { ...newPerson }];
+        console.log("Updated people array:", updatedPeople);
+        return updatedPeople;
+      });
+      setNewPerson({ name: "", dob: "", aadhar: "", mobile: "", age: "" });
+      setShowForm(false);
+    } else {
+      alert("Please fill all fields correctly. Aadhar should be 12 digits and mobile should be 10 digits.");
     }
   };
 
-  // Handle deleting a person
   const handleDeletePerson = (index) => {
-    const updatedPeople = people.filter((_, i) => i !== index);
-    setPeople(updatedPeople);
+    setPeople(prevPeople => prevPeople.filter((_, i) => i !== index));
   };
 
-  // Filter people based on search term
   const filteredPeople = people.filter(
     (person) =>
       person.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -68,16 +73,11 @@ const AddPerson = () => {
 
   return (
     <div>
-      <h1>Dhruv Asati Directory App</h1>
+      <h1>Directory App</h1>
 
-      {/* Buttons to switch screens */}
       <div>
-        <button onClick={() => handleScreenSwitch("addPerson")}>
-          Add New Person
-        </button>
-        <button onClick={() => handleScreenSwitch("retrieve")}>
-          Retrieve Information
-        </button>
+        <button onClick={() => handleScreenSwitch("addPerson")}>Add New Person</button>
+        <button onClick={() => handleScreenSwitch("retrieve")}>Retrieve Information</button>
       </div>
 
       {activeScreen === "addPerson" && (
@@ -104,9 +104,7 @@ const AddPerson = () => {
                     <td>{person.mobile}</td>
                     <td>{person.age}</td>
                     <td>
-                      <button onClick={() => handleDeletePerson(index)}>
-                        Delete
-                      </button>
+                      <button onClick={() => handleDeletePerson(index)}>Delete</button>
                     </td>
                   </tr>
                 ))}
@@ -116,22 +114,12 @@ const AddPerson = () => {
             <p>No data</p>
           )}
 
-          {/* Add Button at the bottom */}
-          <button
-            onClick={() => setShowForm(true)}
-            style={{ position: "fixed", bottom: 10, right: 10 }}
-          >
+          <button onClick={() => setShowForm(true)} style={{ position: "fixed", bottom: 10, right: 10 }}>
             Add
           </button>
 
           {showForm && (
-            <div
-              style={{
-                border: "2px solid blue",
-                padding: "20px",
-                marginTop: "20px",
-              }}
-            >
+            <div className="add-person-form">
               <h3>Fill below form for New Entry</h3>
               <input
                 type="text"
@@ -139,15 +127,13 @@ const AddPerson = () => {
                 placeholder="Name"
                 value={newPerson.name}
                 onChange={handleInputChange}
-                required
               />
               <input
-                type="text"
+                type="date"
                 name="dob"
-                placeholder="dd-mm-yyyy"
+                placeholder="Date of Birth"
                 value={newPerson.dob}
                 onChange={handleInputChange}
-                required
               />
               <input
                 type="number"
@@ -157,7 +143,6 @@ const AddPerson = () => {
                 onChange={handleInputChange}
                 min="100000000000"
                 max="999999999999"
-                required
               />
               <input
                 type="number"
@@ -167,7 +152,6 @@ const AddPerson = () => {
                 onChange={handleInputChange}
                 min="1000000000"
                 max="9999999999"
-                required
               />
               <input
                 type="number"
@@ -176,7 +160,6 @@ const AddPerson = () => {
                 value={newPerson.age}
                 onChange={handleInputChange}
                 min="0"
-                required
               />
               <button onClick={handleAddPerson}>Save</button>
             </div>
