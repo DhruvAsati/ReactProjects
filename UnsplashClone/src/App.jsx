@@ -5,6 +5,7 @@ import { FaSearch } from 'react-icons/fa';
 import Background3D from './components/Background3D';
 import ImageGrid from './components/ImageGrid';
 import ImageModal from './components/ImageModal';
+import Login from './components/Login';
 
 const Home = ({ query, setQuery, images, loading, favorites, toggleFavorite, handleSubmit, openModal }) => {
   return (
@@ -24,6 +25,7 @@ const Home = ({ query, setQuery, images, loading, favorites, toggleFavorite, han
           >
             <FaSearch className="text-xl" />
           </button>
+         
         </div>
       </form>
       {loading ? (
@@ -54,7 +56,9 @@ const Layout = () => {
           <h1 className="text-4xl font-bold text-gray-900 tracking-tight">Unsplash Clone</h1>
           <nav>
             <Link to="/" className="text-gray-600 hover:text-gray-900 mr-6 text-lg font-medium transition-colors duration-300">Home</Link>
+            
             <Link to="/favorites" className="text-gray-600 hover:text-gray-900 text-lg font-medium transition-colors duration-300">Favorites</Link>
+            <Login />
           </nav>
         </div>
       </header>
