@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from './features/userSlice';
 import { auth } from './config/firebaseConfig';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
+import Home from './components/Home';
+import Login from './components/Login'; // Ensure you import the Login component
 import ContactList from './components/ContactList';
 import AddContact from './components/AddContact';
 import EditContact from './components/EditContact';
-import FavoriteContacts from './components/FavoriteContact'; // Import FavoriteContacts
+import FavoriteContacts from './components/FavoriteContact';
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -27,8 +27,8 @@ function App() {
 
   const handleLogout = async () => {
     try {
-      await auth.signOut(); // Sign out from Firebase Auth
-      dispatch(logout());    // Dispatch logout action to Redux
+      await auth.signOut();
+      dispatch(logout());
     } catch (error) {
       console.error('Logout Error:', error);
     }
@@ -38,30 +38,12 @@ function App() {
     <Router>
       <div className="app-container">
         <Routes>
-          <Route
-            path="/"
-            element={user ? <Navigate to="/contacts" /> : <Login />}
-          />
-          <Route
-            path="/signup"
-            element={user ? <Navigate to="/contacts" /> : <SignUp />}
-          />
-          <Route
-            path="/contacts"
-            element={user ? <ContactList user={user} onLogout={handleLogout} /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/add-contact"
-            element={user ? <AddContact user={user} /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/edit-contact/:id"
-            element={user ? <EditContact user={user} /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/favorites"
-            element={user ? <FavoriteContacts user={user} /> : <Navigate to="/" />} // New route for favorites
-          />
+          <Route path="/" element={user ? <Navigate to="/contacts" /> : <Home />} />
+          <Route path="/login" element={<Login />} /> {/* Ensure the login route is here */}
+          <Route path="/contacts" element={user ? <ContactList user={user} onLogout={handleLogout} /> : <Navigate to="/" />} />
+          <Route path="/add-contact" element={user ? <AddContact user={user} /> : <Navigate to="/" />} />
+          <Route path="/edit-contact/:id" element={user ? <EditContact user={user} /> : <Navigate to="/" />} />
+          <Route path="/favorites" element={user ? <FavoriteContacts user={user} /> : <Navigate to="/" />} />
         </Routes>
       </div>
     </Router>
